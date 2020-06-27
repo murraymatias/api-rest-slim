@@ -20,8 +20,11 @@ class JWTMiddleware {
         $response = $handler->handle($request);
         $existingContent = (string) $response->getBody();
     
-        $response = new Response();
-        $response->getBody()->write('BEFORE' . $existingContent);
+        if(true)//check JWT
+        {
+            $response = new Response();
+            $response->getBody()->write($existingContent);
+        }
     
         return $response;
     }
