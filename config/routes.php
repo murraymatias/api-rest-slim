@@ -3,10 +3,12 @@
 namespace Config;
 
 // use App\Utils\Migrations;
-// use Slim\Routing\RouteCollectorProxy;
+use Slim\Routing\RouteCollectorProxy;
 use App\Controllers\UsuarioController;
-use App\Utils\Migrations;
 
 return function ($app) {
-    $app->get('[/]', UsuarioController::class .":getAll");
+
+    $app->post('/login', UsuarioController::class .":login");
+    $app->get('/user', UsuarioController::class .":getAll");
+    $app->get('/test/{id}', UsuarioController::class .":getOne");
 };

@@ -20,7 +20,7 @@ class JSONResponseMiddleware
     {
         $response = $handler->handle($request);
 
-        $response = $response->withHeader('Content-Type', 'aplicattion/json');
+        $response = $response->withHeader('Content-Type', 'application/json');
 
         return $response;
     }
