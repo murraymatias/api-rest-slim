@@ -11,7 +11,7 @@ use Slim\Factory\AppFactory;
 new Database();
 
 $app = AppFactory::create();
-$app->setBasePath("/skeleton/public");
+$app->setBasePath("/suarezmurray.SPPROGIII3D/public");
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true,true,true);
 

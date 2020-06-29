@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use Exception;
 use \Firebase\JWT\JWT;
 
 class Auth
@@ -35,6 +36,16 @@ class Auth
             return JWT::decode($jwt, Auth::$key, array('HS256'));
         } catch (Exception $ex) {
             throw $ex;
+        }
+    }
+
+    public static function validJWT($jwt)
+    {
+        try {
+            JWT::decode($jwt, Auth::$key, array('HS256'));
+            return true;
+        } catch (Exception $ex) {
+            return false;
         }
     }
 }
