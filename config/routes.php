@@ -8,11 +8,15 @@ use App\Controllers\UsuarioController;
 use App\Controllers\TipoMascotaController;
 use App\Middlewares\JWTMiddleware;
 use App\Middlewares\AdministradorMiddleware;
+use App\Middlewares\ClienteMiddleware;
 
 return function ($app) {
 
     $app->post('/registro', UsuarioController::class .":add");
     $app->post('/login', UsuarioController::class .":login");
     $app->post('/tipo_mascota', TipoMascotaController::class .":add")->add(new AdministradorMiddleware());
-    // $app->get('/test/{id}', UsuarioController::class .":getOne");
+    $app->post('/mascotas', MascotaController::class .":add")->add(new ClienteMiddleware);
+    // $app->group('/turnos', function (RouteCollectorProxy $group)
+    // {
+    // }
 };

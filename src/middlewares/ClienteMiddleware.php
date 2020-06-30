@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use App\Utils\Auth;
 
-class VeterinarioMiddleware {
+class ClienteMiddleware {
      /**
      * Middleware for JSON Web token validation
      *
@@ -28,6 +28,7 @@ class VeterinarioMiddleware {
                 $existingContent = (string) $response->getBody();
                 $response = new Response();
                 $response->getBody()->write($existingContent);
+                $response = $response->withAddedHeader('id',$decoded->id);
             }
         return $response;
     }
