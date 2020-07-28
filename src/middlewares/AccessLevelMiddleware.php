@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
+
 use App\Utils\Auth;
+use App\Models\User;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 
-class ValidTokenMiddleware
+class AccessLevelMiddleware
 {
     /**
      * 
@@ -22,11 +24,15 @@ class ValidTokenMiddleware
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
         $token = $request->hasHeader('token') ? $request->getHeaderLine('token') : '';
+        $payload = Auth::getPayload($token);
+        $user = User::find($payload['data']->id);
 
-        if(!Auth::validToken($token)){
-            throw new \Slim\Exception\HttpUnauthorizedException($request,'Invalid token');
+        if($user->tipo != 3)
+        {
+            throw new \Slim\Exception\HttpUnauthorizedException($request,'Insufficient privilege');
         }
-        else{            
+        else
+        {            
             return $handler->handle($request);
         }
     } 

@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Config;
 
 use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
 
 return function (App $app) {
 

@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 class User extends \Illuminate\Database\Eloquent\Model
 {    
-    protected $table = "usuarios";
-    protected $timestamps = false;
+    public $table = "usuarios";
+    public $timestamps = false;
     //protected $primaryKey = "id";
 }
